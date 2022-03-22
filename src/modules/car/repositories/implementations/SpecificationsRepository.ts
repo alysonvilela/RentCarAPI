@@ -2,22 +2,32 @@ import { Specification } from '../../model/Specification';
 import { ICreateSpecificationDTO, ISpecificationsRepository } from '../ISpecificationsRepository';
 
 export class SpecificationRepository implements ISpecificationsRepository {
-  private speficication: Specification[];
+  private specifications: Specification[];
 
-  constructor() {
-    this.speficication = [];
+  private static INSTANCE: SpecificationRepository;
+
+  private constructor() {
+    this.specifications = [];
+  }
+
+  public static getInstance() {
+    if (!SpecificationRepository.INSTANCE) {
+      console.log('new instance');
+      SpecificationRepository.INSTANCE = new SpecificationRepository();
+    }
+    return SpecificationRepository.INSTANCE;
   }
 
   create({ name, description }: ICreateSpecificationDTO): void {
     const specification = new Specification();
     Object.assign<Specification, Specification>(specification, { name, description });
 
-    this.speficication.push(specification);
+    this.specifications.push(specification);
   }
   findByName(name: string) {
-    return this.speficication.find((specification) => specification.name === name);
+    return this.specifications.find((specification) => specification.name === name);
   }
   list(): Specification[] {
-    return this.speficication;
+    return this.specifications;
   }
 }
