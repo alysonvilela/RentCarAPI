@@ -15,11 +15,11 @@ export class CategoriesRepository implements ICategoriesRepository {
     this.categories.push(category);
   }
 
-  list(): Category[] {
-    return this.categories;
-  }
-
   findByName(name: string) {
     return this.categories.find((category) => category.name === name);
+  }
+
+  list(): Category[] {
+    return this.categories;
   }
 }
