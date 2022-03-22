@@ -1,4 +1,4 @@
-import { Category } from "../model/Category";
+import { Category } from '../model/Category';
 
 interface ICreateCategoryDTO {
   name: string
@@ -6,25 +6,25 @@ interface ICreateCategoryDTO {
 }
 
 export class CategoriesRepository {
-  private categories: Category[]
+  private categories: Category[];
 
   constructor() {
-    this.categories = []
+    this.categories = [];
   }
 
   create({ name, description }: ICreateCategoryDTO): void {
-    const category = new Category()
+    const category = new Category();
 
-    const hasCategory = this.categories.some(category => category.name === name);
+    const hasCategory = this.categories.some((category) => category.name === name);
     if (hasCategory) {
-      throw new Error("Categoria já existente")
+      throw new Error('Categoria já existente');
     }
 
-    Object.assign<Category, Category>(category, { name, description, created_at: new Date })
+    Object.assign<Category, Category>(category, { name, description, created_at: new Date() });
     this.categories.push(category);
   }
 
   list(): Category[] {
-    return this.categories
+    return this.categories;
   }
 }

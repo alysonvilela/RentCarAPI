@@ -8,10 +8,10 @@ export class Category {
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4()
+      this.id = uuidV4();
     }
     if (!this.created_at) {
-      this.created_at = new Date()
+      this.created_at = new Date();
     }
   }
 }
